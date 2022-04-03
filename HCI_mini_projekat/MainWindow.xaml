@@ -1,0 +1,79 @@
+﻿<Window x:Class="HCI_mini_projekat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:HCI_mini_projekat"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="0.3*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.5*" />
+            
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.5*" />
+
+            <ColumnDefinition Width="0.4*" />
+            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="0.4*" />
+
+            <ColumnDefinition Width="0.4*" />
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.5*" />
+            
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.1*" />
+        </Grid.ColumnDefinitions>
+        <Label Content="Currency#1" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" />
+        <ComboBox Grid.Column="2" Grid.Row="1" IsEditable="True" />
+        <Label Content="Currency#2" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Right"/>
+        <ComboBox Grid.Column="5" Grid.Row="1" IsEditable="True" Grid.ColumnSpan="3"  />
+
+        <Label Content="Period" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" />
+        <ComboBox Grid.Column="2" Grid.Row="3" />
+
+        <Label Content="Interval" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Right" Visibility="Hidden" />
+        <ComboBox Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="3" Visibility="Hidden" />
+        
+        <Button Content="Draw" Grid.Column="9" Grid.Row="1"/>
+        <Button Content="Refresh" Grid.Column="11" Grid.Row="1"/>
+        <Button Content="Clear" Grid.Column="13" Grid.Row="1"/>
+        <Button Content="Table view" Grid.ColumnSpan="2" Grid.Column="12" Grid.Row="7"/>
+
+        <lvc:CartesianChart Series="{Binding Path=lineChartData.SeriesCollection}" LegendLocation="Right" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="5">
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Sales" LabelFormatter="{Binding Path=lineChartData.YFormatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Month" Labels="{Binding Path=lineChartData.Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
+
+        <lvc:CartesianChart Series="{Binding Path=barChartData.SeriesCollection}" LegendLocation="Right" Grid.Column="7" Grid.ColumnSpan="7" Grid.Row="5">
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Sales" LabelFormatter="{Binding Path=barChartData.YFormatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Month" Labels="{Binding Path= barChartData.Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
+
+
+    </Grid>
+</Window>
