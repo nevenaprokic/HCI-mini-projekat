@@ -16,6 +16,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Wpf;
+using System.Data;
+using CsvHelper;
+using System.IO;
 
 namespace HCI_mini_projekat
 {
@@ -28,6 +31,11 @@ namespace HCI_mini_projekat
         public MainWindow()
         {
             InitializeComponent();
+            List<string> currencyList = CSVReader.readCurrencyList();
+
+            comboBox1.ItemsSource = currencyList;
+            comboBox2.ItemsSource = currencyList;
+
 
             lineChartData = new LineChartData();
             barChartData = new BarChartData();

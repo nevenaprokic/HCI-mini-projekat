@@ -13,8 +13,7 @@ namespace HCI_mini_projekat
     public partial class LineChartData : UserControl
     {
         public LineChartData()
-        { 
-
+        {
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
@@ -31,7 +30,7 @@ namespace HCI_mini_projekat
                 new LineSeries
                 {
                     Title = "Series 3",
-                    Values = new ChartValues<double> { 4,2,7,2,7 },
+                    Values = new ChartValues<double> { 4, 2, 7, 2, 7 },
                     PointGeometry = DefaultGeometries.Square,
                     PointGeometrySize = 15
                 }
