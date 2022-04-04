@@ -28,19 +28,19 @@ namespace HCI_mini_projekat
         public Dictionary<string, string> tableAPIs{ get; set; }
         public LineChartData lineChartData { get; set; }
         public BarChartData barChartData { get; set; }
-
         public TableWindow tableWindow { get; set; }
+        public List<string> currencyList;
 
         public MainWindow()
         {
             InitializeComponent();
-            List<string> currencyList = CSVReader.readCurrencyList();
+            currencyList = CSVReader.readCurrencyList();
 
             comboFrom.ItemsSource = currencyList;
             comboTo.ItemsSource = currencyList;
 
             comboPeriod.ItemsSource = new[] { "Intraday", "Daily", "Weekly", "Monthly" };
-            comboPeriod.SelectedIndex = 0;
+            comboPeriod.SelectedIndex = 2;
 
             comboInterval.ItemsSource = new[] { "1min", "5min", "15min", "30min", "60min" };
             comboAttribute.ItemsSource = new[] { "low", "high", "open", "close" };
@@ -51,25 +51,47 @@ namespace HCI_mini_projekat
 
             tableAPIs = new Dictionary<string, string>();
 
-
+            
         }
         private void DrawHandler(object sender, RoutedEventArgs e)
         {
-            string fromSymbol = comboFrom.SelectedValue.ToString().Substring(0, 3);
-            string toSymbol = comboTo.SelectedValue.ToString().Substring(0, 3);
-            string period = comboPeriod.SelectedValue.ToString();
-            string attribute = comboAttribute.SelectedValue.ToString();
-            string interval = "";
-
-            barChartData.createChart(fromSymbol, toSymbol, period, attribute);
-            lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
-            SetTableData(fromSymbol, toSymbol, period, attribute);
+            
+            if(comboFrom.SelectedValue != null && comboTo.SelectedValue != null)
+            {
+                
+                string fromSymbol = comboFrom.SelectedValue.ToString().Substring(0, 3);
+                string toSymbol = comboTo.SelectedValue.ToString().Substring(0, 3);
+                string period = comboPeriod.SelectedValue.ToString();
+                string attribute = comboAttribute.SelectedValue.ToString();
+                string interval = "";
+                
+                barChartData.createChart(fromSymbol, toSymbol, period, attribute);
+                lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
+                SetTableData(fromSymbol, toSymbol, period, attribute);
+            }
+            else
+            {
+                MessageWindow messageWindow = new MessageWindow("Entered currencies are incorrect!");
+                messageWindow.Show();
+            }
+           
 
             DataContext = this;
 
             
 
 
+        }
+        private void ChangeHandler(object sender, RoutedEventArgs e)
+        {
+            if (comboPeriod.SelectedValue.ToString().Equals("Intraday"))
+            {
+                comboInterval.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                comboInterval.Visibility = Visibility.Hidden;
+            }
         }
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {

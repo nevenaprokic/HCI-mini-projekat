@@ -47,8 +47,8 @@
 
 
 
-        <Label Content="Interval" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Right" Visibility="Hidden"  Foreground="#911C33"/>
-        <ComboBox Grid.Column="5" x:Name="comboInterval" Grid.Row="3" Grid.ColumnSpan="3" Visibility="Hidden" />
+        <Label Content="Interval" x:Name="labelInterval" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Right" Visibility="Hidden"  Foreground="#911C33"/>
+        <ComboBox Grid.Column="5" x:Name="comboInterval" Grid.Row="3" Grid.ColumnSpan="3" Visibility="Hidden"/>
 
         <Label Content="Period" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Foreground="#911C33"/>
         <ComboBox Grid.Column="2" Grid.Row="3" x:Name="comboPeriod" />
