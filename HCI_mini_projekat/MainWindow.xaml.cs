@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Controls;
-using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System.Data;
@@ -40,7 +38,29 @@ namespace HCI_mini_projekat
             lineChartData = new LineChartData();
             barChartData = new BarChartData();
 
+            
+        }
+        private void DrawHandler(object sender, RoutedEventArgs e)
+        {
+            string value1 = comboBox1.SelectedValue.ToString();
+            string value2 = comboBox2.SelectedValue.ToString();
+
+            ComboBoxItem typeItem = (ComboBoxItem)comboBox3.SelectedItem;
+            string value3 = typeItem.Content.ToString();
+            ComboBoxItem typeItem1 = (ComboBoxItem)comboBox4.SelectedItem;
+            string value4 = typeItem1.Content.ToString();
+
+            
             DataContext = this;
+        }
+        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
         public LineChartData lineChartData { get; set; }
         public BarChartData barChartData { get; set; }
