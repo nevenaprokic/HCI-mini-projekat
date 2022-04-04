@@ -51,7 +51,7 @@
         <ComboBox Grid.Column="5" x:Name="comboInterval" Grid.Row="3" Grid.ColumnSpan="3" Visibility="Hidden"/>
 
         <Label Content="Period" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Foreground="#911C33"/>
-        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="comboPeriod" />
+        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="comboPeriod" SelectionChanged="drawComboboxInterval" />  
 
         <Button Content="Draw" Grid.Column="9" Grid.Row="3" Click="DrawHandler" Background="#141C61" Foreground="White">
             <Button.Resources>

@@ -40,7 +40,7 @@ namespace HCI_mini_projekat
             comboTo.ItemsSource = currencyList;
 
             comboPeriod.ItemsSource = new[] { "Intraday", "Daily", "Weekly", "Monthly" };
-            comboPeriod.SelectedIndex = 2;
+            comboPeriod.SelectedIndex = 0;
 
             comboInterval.ItemsSource = new[] { "1min", "5min", "15min", "30min", "60min" };
             comboAttribute.ItemsSource = new[] { "low", "high", "open", "close" };
@@ -81,6 +81,24 @@ namespace HCI_mini_projekat
             
 
 
+        }
+        private void drawComboboxInterval(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboPeriod.SelectedItem != null)
+            {
+                
+                string selectedCurrenciesPair = comboPeriod.SelectedValue.ToString();
+                if (selectedCurrenciesPair.Equals("Intraday"))
+                {
+                    comboInterval.Visibility = Visibility.Visible;
+                    labelInterval.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    comboInterval.Visibility = Visibility.Hidden;
+                    labelInterval.Visibility = Visibility.Hidden;
+                }
+            }
         }
         private void ChangeHandler(object sender, RoutedEventArgs e)
         {
