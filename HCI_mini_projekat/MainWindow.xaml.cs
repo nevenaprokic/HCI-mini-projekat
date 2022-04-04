@@ -25,6 +25,11 @@ namespace HCI_mini_projekat
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Dictionary<string, string> tableAPIs{ get; set; }
+        public LineChartData lineChartData { get; set; }
+        public BarChartData barChartData { get; set; }
+
+        public TableWindow tableWindow { get; set; }
 
         public MainWindow()
         {
@@ -44,7 +49,9 @@ namespace HCI_mini_projekat
             lineChartData = new LineChartData();
             barChartData = new BarChartData();
 
-            
+            tableAPIs = new Dictionary<string, string>();
+
+
         }
         private void DrawHandler(object sender, RoutedEventArgs e)
         {
@@ -54,28 +61,61 @@ namespace HCI_mini_projekat
             string attribute = comboAttribute.SelectedValue.ToString();
             string interval = "";
 
-            Console.WriteLine(fromSymbol);
-            Console.WriteLine(toSymbol);
-            Console.WriteLine(period);
-            Console.WriteLine(attribute);
-            Console.WriteLine(interval);
-
             barChartData.createChart(fromSymbol, toSymbol, period, attribute);
             lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
+            SetTableData(fromSymbol, toSymbol, period, attribute);
 
             DataContext = this;
+
+            
+
+
         }
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void ClickHandler(object sender, RoutedEventArgs e)
+        private void ClearkHandler(object sender, RoutedEventArgs e)
         {
             barChartData.cleanChart();
             lineChartData.cleanChart();
+            tableAPIs.Clear();
         }
-        public LineChartData lineChartData { get; set; }
-        public BarChartData barChartData { get; set; }
+
+        private void ViewTableBtn(object sender, RoutedEventArgs e)
+        {
+            tableWindow = new TableWindow();
+
+            tableWindow.Show();
+
+        }
+        private void SetTableData(string fromSymbol, string toSymbol, string value3, string value4)
+        {
+            string function = "FX_" + value3.ToUpper();
+
+            string QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&apikey=JWLV0KC5UDNH6ODA";
+           
+            //ovde treba da se pozove funkcija za formiranje API-a i dobijeni api se ubaci u tableAPIs
+            //string api1 = "https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=5min&apikey=demo";
+            //string api2 = "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&apikey=demo";
+            //string tittle1 = "EUR-USD1"; //title moze da se uzme od selektovanih elemenata combobox-a
+            string tittle = fromSymbol + "-" + toSymbol; //da li na table view dugme da se i uzimaju podaci ili da zavisi od draw buttona
+
+            if (tableAPIs.ContainsKey(tittle))
+            {
+                tableAPIs[tittle] = QUERY_URL;
+            }
+            else
+            {
+                tableAPIs.Add(tittle, QUERY_URL);
+            }
+            if(tableWindow != null)
+            {
+                tableWindow.addToComboBox(tittle, QUERY_URL);
+            }
+            
+        }
     }
+
 }
