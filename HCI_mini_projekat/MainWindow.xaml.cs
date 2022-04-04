@@ -50,7 +50,7 @@ namespace HCI_mini_projekat
             ComboBoxItem typeItem1 = (ComboBoxItem)comboBox4.SelectedItem;
             string value4 = typeItem1.Content.ToString();
 
-            
+            barChartData.createChart(value1, value2, value3, value4);
             DataContext = this;
         }
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
@@ -60,7 +60,7 @@ namespace HCI_mini_projekat
 
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
         {
-            
+            barChartData.cleanChart();
         }
         public LineChartData lineChartData { get; set; }
         public BarChartData barChartData { get; set; }
