@@ -30,11 +30,9 @@ namespace HCI_mini_projekat
             SeriesCollection.Clear();
             Labels.Clear();
         }
-        public void createChart(string value1, string value2, string value3, string value4)
+        public void createChart(string fromSymbol, string toSymbol, string value3, string value4)
         {
             currency++;
-            string fromSymbol = value1.Substring(0, 3);
-            string toSymbol = value2.Substring(0, 3);
             string function = "FX_" + value3.ToUpper();
 
             string QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&apikey=JWLV0KC5UDNH6ODA";

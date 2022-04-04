@@ -41,28 +41,17 @@
             <ColumnDefinition Width="0.1*" />
         </Grid.ColumnDefinitions>
         <Label Content="Currency#1" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right"  Foreground="#911C33"/>
-        <ComboBox Grid.Column="2" x:Name="comboBox1" Grid.Row="1" IsEditable="True" />
+        <ComboBox Grid.Column="2" x:Name="comboFrom" Grid.Row="1" IsEditable="True" />
         <Label Content="Currency#2" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Right"  Foreground="#911C33"/>
-        <ComboBox Grid.Column="5" x:Name="comboBox2" Grid.Row="1" IsEditable="True" Grid.ColumnSpan="3"  />
+        <ComboBox Grid.Column="5" x:Name="comboTo" Grid.Row="1" IsEditable="True" Grid.ColumnSpan="3"  />
 
 
 
         <Label Content="Interval" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Right" Visibility="Hidden"  Foreground="#911C33"/>
-        <ComboBox Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="3" Visibility="Hidden" >
-            <ComboBoxItem Content="1min"/>
-            <ComboBoxItem Content="5min"/>
-            <ComboBoxItem Content="15min"/>
-            <ComboBoxItem Content="30min"/>
-            <ComboBoxItem Content="60min"/>
-        </ComboBox>
+        <ComboBox Grid.Column="5" x:Name="comboInterval" Grid.Row="3" Grid.ColumnSpan="3" Visibility="Hidden" />
 
         <Label Content="Period" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Foreground="#911C33"/>
-        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="comboBox3">
-            <ComboBoxItem Content="Intraday"/>
-            <ComboBoxItem Content="Daily"/>
-            <ComboBoxItem Content="Weekly"/>
-            <ComboBoxItem Content="Monthly"/>
-        </ComboBox>
+        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="comboPeriod" />
 
         <Button Content="Draw" Grid.Column="9" Grid.Row="3" Click="DrawHandler" Background="#141C61" Foreground="White">
             <Button.Resources>
@@ -112,12 +101,7 @@
         </lvc:CartesianChart>
 
         <Label Content="Attribute" Grid.Column="9" Grid.Row="1" HorizontalAlignment="Center" Foreground="#911C33"/>
-        <ComboBox Grid.ColumnSpan="3" Grid.Column="10" Grid.Row="1" x:Name="comboBox4">
-            <ComboBoxItem Content="high"/>
-            <ComboBoxItem Content="low"/>
-            <ComboBoxItem Content="open"/>
-            <ComboBoxItem Content="close"/>
-        </ComboBox>
+        <ComboBox Grid.ColumnSpan="3" Grid.Column="10" Grid.Row="1" x:Name="comboAttribute" />
 
 
     </Grid>

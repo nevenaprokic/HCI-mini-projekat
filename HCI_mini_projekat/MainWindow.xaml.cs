@@ -31,9 +31,15 @@ namespace HCI_mini_projekat
             InitializeComponent();
             List<string> currencyList = CSVReader.readCurrencyList();
 
-            comboBox1.ItemsSource = currencyList;
-            comboBox2.ItemsSource = currencyList;
+            comboFrom.ItemsSource = currencyList;
+            comboTo.ItemsSource = currencyList;
 
+            comboPeriod.ItemsSource = new[] { "Intraday", "Daily", "Weekly", "Monthly" };
+            comboPeriod.SelectedIndex = 0;
+
+            comboInterval.ItemsSource = new[] { "1min", "5min", "15min", "30min", "60min" };
+            comboAttribute.ItemsSource = new[] { "low", "high", "open", "close" };
+            comboAttribute.SelectedIndex = 0;
 
             lineChartData = new LineChartData();
             barChartData = new BarChartData();
@@ -42,15 +48,24 @@ namespace HCI_mini_projekat
         }
         private void DrawHandler(object sender, RoutedEventArgs e)
         {
-            string value1 = comboBox1.SelectedValue.ToString();
-            string value2 = comboBox2.SelectedValue.ToString();
+            string fromSymbol = comboFrom.SelectedValue.ToString().Substring(0, 3);
+            string toSymbol = comboTo.SelectedValue.ToString().Substring(0, 3);
+            //ComboBoxItem typeItem = (ComboBoxItem)comboBox3.SelectedItem;
+            string period = comboPeriod.SelectedValue.ToString();
+            //ComboBoxItem typeItem1 = (ComboBoxItem)comboBox4.SelectedItem;
+            string attribute = comboAttribute.SelectedValue.ToString();
+            //string interval = comboInterval.SelectedValue.ToString();
+            string interval = "";
 
-            ComboBoxItem typeItem = (ComboBoxItem)comboBox3.SelectedItem;
-            string value3 = typeItem.Content.ToString();
-            ComboBoxItem typeItem1 = (ComboBoxItem)comboBox4.SelectedItem;
-            string value4 = typeItem1.Content.ToString();
+            Console.WriteLine(fromSymbol);
+            Console.WriteLine(toSymbol);
+            Console.WriteLine(period);
+            Console.WriteLine(attribute);
+            Console.WriteLine(interval);
 
-            barChartData.createChart(value1, value2, value3, value4);
+            barChartData.createChart(fromSymbol, toSymbol, period, attribute);
+            lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
+
             DataContext = this;
         }
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
