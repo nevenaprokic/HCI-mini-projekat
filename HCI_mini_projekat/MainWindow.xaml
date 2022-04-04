@@ -67,7 +67,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Clear" Grid.Column="13" Grid.Row="3" Click="ButtonClear_Click" Background="#141C61" Foreground="White">
+        <Button Content="Clear" Grid.Column="13" Grid.Row="3" Click="ClickHandler" Background="#141C61" Foreground="White">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

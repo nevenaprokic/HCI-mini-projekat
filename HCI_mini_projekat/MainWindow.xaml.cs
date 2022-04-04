@@ -50,11 +50,8 @@ namespace HCI_mini_projekat
         {
             string fromSymbol = comboFrom.SelectedValue.ToString().Substring(0, 3);
             string toSymbol = comboTo.SelectedValue.ToString().Substring(0, 3);
-            //ComboBoxItem typeItem = (ComboBoxItem)comboBox3.SelectedItem;
             string period = comboPeriod.SelectedValue.ToString();
-            //ComboBoxItem typeItem1 = (ComboBoxItem)comboBox4.SelectedItem;
             string attribute = comboAttribute.SelectedValue.ToString();
-            //string interval = comboInterval.SelectedValue.ToString();
             string interval = "";
 
             Console.WriteLine(fromSymbol);
@@ -73,9 +70,10 @@ namespace HCI_mini_projekat
 
         }
 
-        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        private void ClickHandler(object sender, RoutedEventArgs e)
         {
             barChartData.cleanChart();
+            lineChartData.cleanChart();
         }
         public LineChartData lineChartData { get; set; }
         public BarChartData barChartData { get; set; }
