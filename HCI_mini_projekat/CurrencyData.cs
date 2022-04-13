@@ -18,18 +18,14 @@ namespace HCI_mini_projekat
     internal class CurrencyData
     {
 
-        public dynamic getData(string api)
+        public dynamic getData(string url)
         {
-            string url = api;
-            Uri queryUri = new Uri(api);
+            Uri queryUri = new Uri(url);
 
             using (WebClient client = new WebClient())
             {
-
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 dynamic json_data = js.Deserialize(client.DownloadString(queryUri), typeof(object));
-
-
 
                 return json_data;
 

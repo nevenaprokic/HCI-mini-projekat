@@ -66,7 +66,7 @@ namespace HCI_mini_projekat
                 {
                     Title = "Currency#" + currency.ToString() + " \n" + transaction + " " + period,
                     Values = new ChartValues<decimal>(values),
-                    Fill = (SolidColorBrush)new BrushConverter().ConvertFrom(color[currency % 6 - 1])
+                    Fill = (SolidColorBrush)new BrushConverter().ConvertFrom(color[currency % 6])
                 });
 
 

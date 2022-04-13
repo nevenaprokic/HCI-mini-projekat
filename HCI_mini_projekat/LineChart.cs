@@ -22,6 +22,7 @@ namespace HCI_mini_projekat
 
             TimeSeriesMapper = new Dictionary<string, string>
             {
+                { "Intraday", "FX_INTRADAY"},
                 { "Daily", "FX_DAILY" },
                 { "Weekly", "FX_WEEKLY" },
                 { "Monthly", "FX_MONTHLY" }
@@ -38,45 +39,54 @@ namespace HCI_mini_projekat
         public void AddPair(string timeSeries, string fromSymbol, string toSymbol, string attribute, string interval)
         {
             // api key W1M42UWZUELKQJII
-            string QUERY_URL = null;
-
-            if (interval != "")
+            try
             {
-                QUERY_URL = $"https://www.alphavantage.co/query?function={TimeSeriesMapper[timeSeries]}&from_symbol={fromSymbol}&to_symbol={toSymbol}&interval={interval}&apikey=W1M42UWZUELKQJII";
-            }
-            else
-            {
-                QUERY_URL = $"https://www.alphavantage.co/query?function={TimeSeriesMapper[timeSeries]}&from_symbol={fromSymbol}&to_symbol={toSymbol}&apikey=W1M42UWZUELKQJII";
-            }
-            Uri queryUri = new Uri(QUERY_URL);
+                string QUERY_URL = null;
 
-            using (WebClient client = new WebClient())
-            {
-                JavaScriptSerializer js = new JavaScriptSerializer();
-                dynamic json_data = js.Deserialize(client.DownloadString(queryUri), typeof(object));
-                Dictionary<string, dynamic>.KeyCollection keys = json_data.Keys;
-                // Key : "Time Series FX (5min)"
-                // Next Key: "1. open" 
-                string key = computeKey(timeSeries, interval);
-                //Console.WriteLine("KLJUC _____" + key);
-                //printParameters(fromSymbol, toSymbol, timeSeries, interval, attribute, QUERY_URL);
-                dynamic list = json_data[$"Time Series FX ({key})"];
-                ChartValues<double> values = new ChartValues<double>();
-
-                foreach (KeyValuePair<string, dynamic> entry in list)
+                if (interval != "")
                 {
-                    double val = Double.Parse(entry.Value[AttributeMapper[attribute]]);
-                    Labels.Add(entry.Key);
-                    values.Add(val);
+                    QUERY_URL = $"https://www.alphavantage.co/query?function={TimeSeriesMapper[timeSeries]}&from_symbol={fromSymbol}&to_symbol={toSymbol}&interval={interval}&apikey=W1M42UWZUELKQJII";
                 }
-                LineSeries lineSeries = new LineSeries
+                else
                 {
-                    Title = $"{fromSymbol}-{toSymbol}",
-                    Values = values,
-                    PointGeometry = null,
-                    PointGeometrySize = 15
-                };
-                SeriesCollection.Add(lineSeries);
+                    QUERY_URL = $"https://www.alphavantage.co/query?function={TimeSeriesMapper[timeSeries]}&from_symbol={fromSymbol}&to_symbol={toSymbol}&apikey=W1M42UWZUELKQJII";
+                }
+                Uri queryUri = new Uri(QUERY_URL);
+
+                using (WebClient client = new WebClient())
+                {
+                    JavaScriptSerializer js = new JavaScriptSerializer();
+                    dynamic json_data = js.Deserialize(client.DownloadString(queryUri), typeof(object));
+                    Dictionary<string, dynamic>.KeyCollection keys = json_data.Keys;
+                    // Key : "Time Series FX (5min)"
+                    // Next Key: "1. open" 
+                    string key = computeKey(timeSeries, interval);
+                    
+                    //printParameters(fromSymbol, toSymbol, timeSeries, interval, attribute, QUERY_URL);
+                    Console.WriteLine(json_data);
+                    Console.WriteLine("Kljuc: ", key);
+                    dynamic list = json_data[$"Time Series FX ({key})"];
+                    ChartValues<double> values = new ChartValues<double>();
+
+                    foreach (KeyValuePair<string, dynamic> entry in list)
+                    {
+                        double val = Double.Parse(entry.Value[AttributeMapper[attribute]]);
+                        Labels.Add(entry.Key);
+                        values.Add(val);
+                    }
+                    LineSeries lineSeries = new LineSeries
+                    {
+                        Title = $"{fromSymbol}-{toSymbol}",
+                        Values = values,
+                        PointGeometry = null,
+                        PointGeometrySize = 15
+                    };
+                    SeriesCollection.Add(lineSeries);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 

@@ -30,11 +30,14 @@ namespace HCI_mini_projekat
         public BarChartData barChartData { get; set; }
         public TableWindow tableWindow { get; set; }
         public List<string> currencyList;
+
+
         void SetProperties()
         {
             this.Title = "Exchange rate change";
-            this.Height = 450;
-            this.Width = 800;
+           
+            this.MinHeight = 500;
+            this.MinWidth = 800;
             Uri iconUri = new Uri("../../images/bar-graph.ico", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(iconUri);
         }
@@ -78,15 +81,22 @@ namespace HCI_mini_projekat
                 if (comboPeriod.SelectedValue.ToString() == "Intraday")
                     interval = comboInterval.SelectedValue.ToString();
 
-
-                barChartData.createChart(fromSymbol, toSymbol, period, attribute, interval);
-                //lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
-                SetTableData();  
+                try
+                {
+                    barChartData.createChart(fromSymbol, toSymbol, period, attribute, interval);
+                    lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
+                    SetTableData();
+                }
+                catch (Exception exc)
+                {
+                    MessageWindow messageWindow = new MessageWindow(this, "Something went wrong.\n Please wait a few second and try again!");
+                    messageWindow.Show();
+                }
     
             }
             else
             {
-                MessageWindow messageWindow = new MessageWindow("Entered currencies are incorrect!");
+                MessageWindow messageWindow = new MessageWindow(this, "Entered currencies are incorrect!");
                 messageWindow.Show();
             }
            
@@ -126,7 +136,7 @@ namespace HCI_mini_projekat
             }
         }
        
-        private void ClearkHandler(object sender, RoutedEventArgs e)
+        private void ClearHandler(object sender, RoutedEventArgs e)
         {
             barChartData.cleanChart();
             lineChartData.cleanChart();
@@ -143,7 +153,7 @@ namespace HCI_mini_projekat
             }
             catch
             {
-                MessageWindow messageWindow = new MessageWindow("Entered currencies are incorrect!");
+                MessageWindow messageWindow = new MessageWindow(this, "Entered currencies are incorrect!");
                 messageWindow.Show();
             }
             
@@ -162,15 +172,14 @@ namespace HCI_mini_projekat
                 if (comboPeriod.SelectedValue.ToString() == "Intraday")
                     interval = comboInterval.SelectedValue.ToString();
 
-
                 string function = "FX_" + period.ToUpper();
                 string QUERY_URL;
                 if (interval == "")
-                    QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&apikey=JWLV0KC5UDNH6ODA";
+                    QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&apikey=CG5DNZSYSGV0VB47";
                 else
-                    QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&interval=" + interval + "&apikey=JWLV0KC5UDNH6ODA";
+                    QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&interval=" + interval + "&apikey=CG5DNZSYSGV0VB47";
 
-                string tittle = fromSymbol + "-" + toSymbol + " (" + period +  " " + interval + ")" ; //da li na table view dugme da se i uzimaju podaci ili da zavisi od draw buttona
+                string tittle = fromSymbol + "-" + toSymbol + " (" + period +  " " + interval + ")" ;
 
 
                 if (tableAPIs.ContainsKey(tittle))

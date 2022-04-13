@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_mini_projekat"
         mc:Ignorable="d"
-        Title="MessageWindow" Height="180" Width="568.571">
+        Height="180" Width="568.571" ResizeMode="NoResize">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.8*" />
@@ -21,8 +22,8 @@
             <ColumnDefinition Width="5*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <Label Content="" x:Name="labelMessage" Grid.Column="2" Grid.ColumnSpan="2" FontSize="22" Grid.Row="1" HorizontalAlignment="Left" Foreground="#911C33"/>
-        <Button Content="Ok" Grid.Column="2"  Grid.Row="3" Background="#141C61" FontSize="20" Foreground="White" Click="CloseHandler"/>
+        <Label Content="" x:Name="labelMessage" Grid.Column="2" Grid.ColumnSpan="2" FontSize="15" Grid.Row="1" HorizontalAlignment="Left" Foreground="#911C33"/>
+        <Button Content="Ok" Grid.Column="2"  Grid.Row="3" Background="#141C61" FontSize="17" Foreground="White" Click="CloseHandler"/>
         <Image Grid.Column="1" x:Name="imegePicture" HorizontalAlignment="Center" Grid.Row="1"   Height="80" Visibility="Visible"/>
     </Grid>
 </Window>

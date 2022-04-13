@@ -59,29 +59,17 @@ namespace HCI_mini_projekat
         }
         public TableWindow()
         {
-            InitializeComponent();
-            SetProperties();
-            DataContext = this;
+                InitializeComponent();
+                SetProperties();
+                DataContext = this;
 
-            var window = Application.Current.MainWindow; //referenca na main window
+                var window = Application.Current.MainWindow; //referenca na main window
 
-            tableRowsData = new ObservableCollection<CurrencyRowData>();
-            data = new CurrencyData();
+                tableRowsData = new ObservableCollection<CurrencyRowData>();
+                data = new CurrencyData();
 
-            tableAPIs = (window as MainWindow).tableAPIs;
-            //preuyeti kljuc da bude naziv buttona, automatski otvoriti prvo dugme, a ostalo pozivati po kliku, na klik uzeti ime buttona i pristuptiti mapi, uzeti api i iscrtati
-            createComboBox();
-
-            //popuniti podacima
-
-
-            //drawTable(tableAPIs.ElementAt(0).Value);
-
-            
-
-            //string cardTitle = firstCurrency.Substring(0, 3) + "-" +secondCurrency.Substring(0,3);
-
-
+                tableAPIs = (window as MainWindow).tableAPIs;
+                createComboBox();
 
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -107,13 +95,21 @@ namespace HCI_mini_projekat
         }
         private void currrencyComboboxChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (currenciesCombobox.SelectedItem != null)
+            try
             {
-                //ComboBoxItem cbi1 = (ComboBoxItem)(sender as ComboBox).SelectedItem;
-                ComboBoxItem item = (ComboBoxItem)currenciesCombobox.SelectedItem;
-                string selectedCurrenciesPair = item.Content.ToString();
-                string api = tableAPIs[selectedCurrenciesPair];
-                drawTable(api);
+                if (currenciesCombobox.SelectedItem != null)
+                {
+                    //ComboBoxItem cbi1 = (ComboBoxItem)(sender as ComboBox).SelectedItem;
+                    ComboBoxItem item = (ComboBoxItem)currenciesCombobox.SelectedItem;
+                    string selectedCurrenciesPair = item.Content.ToString();
+                    string api = tableAPIs[selectedCurrenciesPair];
+                    drawTable(api);
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageWindow messageWindow = new MessageWindow(this, "Something went wrong.\n Please wait a few second and try again!");
+                messageWindow.Show();
             }
         }
 
