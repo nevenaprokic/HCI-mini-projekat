@@ -81,7 +81,8 @@ namespace HCI_mini_projekat
 
                 barChartData.createChart(fromSymbol, toSymbol, period, attribute, interval);
                 //lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
-                SetTableData(fromSymbol, toSymbol, period, attribute);
+                SetTableData();  
+    
             }
             else
             {
@@ -92,10 +93,9 @@ namespace HCI_mini_projekat
 
             DataContext = this;
 
-            
-
-
         }
+
+
         private void drawComboboxInterval(object sender, SelectionChangedEventArgs e)
         {
             if (comboPeriod.SelectedItem != null)
@@ -135,35 +135,59 @@ namespace HCI_mini_projekat
 
         private void ViewTableBtn(object sender, RoutedEventArgs e)
         {
-            tableWindow = new TableWindow();
-
-            tableWindow.Show();
+            try
+            {
+                SetTableData();
+                tableWindow = new TableWindow();
+                tableWindow.Show();
+            }
+            catch
+            {
+                MessageWindow messageWindow = new MessageWindow("Entered currencies are incorrect!");
+                messageWindow.Show();
+            }
+            
 
         }
-        private void SetTableData(string fromSymbol, string toSymbol, string value3, string value4)
+        private void SetTableData()
         {
-            string function = "FX_" + value3.ToUpper();
 
-            string QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&apikey=JWLV0KC5UDNH6ODA";
-           
-            //ovde treba da se pozove funkcija za formiranje API-a i dobijeni api se ubaci u tableAPIs
-            //string api1 = "https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=5min&apikey=demo";
-            //string api2 = "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&apikey=demo";
-            //string tittle1 = "EUR-USD1"; //title moze da se uzme od selektovanih elemenata combobox-a
-            string tittle = fromSymbol + "-" + toSymbol; //da li na table view dugme da se i uzimaju podaci ili da zavisi od draw buttona
+            if (comboFrom.SelectedValue != null && comboTo.SelectedValue != null)
+            {
 
-            if (tableAPIs.ContainsKey(tittle))
-            {
-                tableAPIs[tittle] = QUERY_URL;
+                string fromSymbol = comboFrom.SelectedValue.ToString().Substring(0, 3);
+                string toSymbol = comboTo.SelectedValue.ToString().Substring(0, 3);
+                string period = comboPeriod.SelectedValue.ToString();
+                string interval = "";
+                if (comboPeriod.SelectedValue.ToString() == "Intraday")
+                    interval = comboInterval.SelectedValue.ToString();
+
+
+                string function = "FX_" + period.ToUpper();
+                string QUERY_URL;
+                if (interval == "")
+                    QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&apikey=JWLV0KC5UDNH6ODA";
+                else
+                    QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&interval=" + interval + "&apikey=JWLV0KC5UDNH6ODA";
+
+                string tittle = fromSymbol + "-" + toSymbol + " (" + period +  " " + interval + ")" ; //da li na table view dugme da se i uzimaju podaci ili da zavisi od draw buttona
+
+
+                if (tableAPIs.ContainsKey(tittle))
+                {
+                    tableAPIs[tittle] = QUERY_URL;
+                }
+                else
+                {
+                    tableAPIs.Add(tittle, QUERY_URL);
+                }
+                if (tableWindow != null)
+                {
+                    tableWindow.addToComboBox(tittle, QUERY_URL);
+                }
+
             }
-            else
-            {
-                tableAPIs.Add(tittle, QUERY_URL);
-            }
-            if(tableWindow != null)
-            {
-                tableWindow.addToComboBox(tittle, QUERY_URL);
-            }
+  
             
         }
     }
