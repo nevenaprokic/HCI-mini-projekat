@@ -22,6 +22,8 @@ namespace HCI_mini_projekat
         public MessageWindow(string message)
         {
             InitializeComponent();
+            Uri iconUri = new Uri("../../images/warning.png", UriKind.RelativeOrAbsolute);
+            imegePicture.Source = BitmapFrame.Create(iconUri);
             labelMessage.Content = message;
         }
         private void CloseHandler(object sender, RoutedEventArgs e) =>

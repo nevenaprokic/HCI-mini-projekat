@@ -30,10 +30,20 @@ namespace HCI_mini_projekat
         public BarChartData barChartData { get; set; }
         public TableWindow tableWindow { get; set; }
         public List<string> currencyList;
-
+        void SetProperties()
+        {
+            this.Title = "Exchange rate change";
+            this.Height = 450;
+            this.Width = 800;
+            Uri iconUri = new Uri("../../images/bar-graph.ico", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
+        }
         public MainWindow()
         {
+            
             InitializeComponent();
+            SetProperties();
+            
             currencyList = CSVReader.readCurrencyList();
 
             comboFrom.ItemsSource = currencyList;
@@ -43,6 +53,7 @@ namespace HCI_mini_projekat
             comboPeriod.SelectedIndex = 0;
 
             comboInterval.ItemsSource = new[] { "1min", "5min", "15min", "30min", "60min" };
+            comboInterval.SelectedIndex = 0;
             comboAttribute.ItemsSource = new[] { "low", "high", "open", "close" };
             comboAttribute.SelectedIndex = 0;
 
@@ -64,9 +75,12 @@ namespace HCI_mini_projekat
                 string period = comboPeriod.SelectedValue.ToString();
                 string attribute = comboAttribute.SelectedValue.ToString();
                 string interval = "";
-                
-                barChartData.createChart(fromSymbol, toSymbol, period, attribute);
-                lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
+                if (comboPeriod.SelectedValue.ToString() == "Intraday")
+                    interval = comboInterval.SelectedValue.ToString();
+
+
+                barChartData.createChart(fromSymbol, toSymbol, period, attribute, interval);
+                //lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
                 SetTableData(fromSymbol, toSymbol, period, attribute);
             }
             else
@@ -111,11 +125,7 @@ namespace HCI_mini_projekat
                 comboInterval.Visibility = Visibility.Hidden;
             }
         }
-        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+       
         private void ClearkHandler(object sender, RoutedEventArgs e)
         {
             barChartData.cleanChart();

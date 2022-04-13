@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_mini_projekat"
-        mc:Ignorable="d"
-        Title="TableWindow" Height="450" Width="800">
+        mc:Ignorable="d" >
     <Grid x:Name="Tabel">
 
         <Grid.RowDefinitions>

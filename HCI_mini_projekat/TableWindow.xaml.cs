@@ -49,9 +49,18 @@ namespace HCI_mini_projekat
 
         CurrencyData data { get; set; }
 
+        void SetProperties()
+        {
+            this.Title = "Table of data";
+            this.Height = 450;
+            this.Width = 800;
+            Uri iconUri = new Uri("../../images/bar-graph.ico", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
+        }
         public TableWindow()
         {
             InitializeComponent();
+            SetProperties();
             DataContext = this;
 
             var window = Application.Current.MainWindow; //referenca na main window

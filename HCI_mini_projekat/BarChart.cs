@@ -30,12 +30,18 @@ namespace HCI_mini_projekat
             SeriesCollection.Clear();
             Labels.Clear();
         }
-        public void createChart(string fromSymbol, string toSymbol, string value3, string value4)
+        public void createChart(string fromSymbol, string toSymbol, string period, string attribute, string interval)
         {
             currency++;
-            string function = "FX_" + value3.ToUpper();
-
-            string QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&apikey=JWLV0KC5UDNH6ODA";
+            string function = "FX_" + period.ToUpper();
+            string QUERY_URL = "";
+            Console.WriteLine(interval);
+            //https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=5min&apikey=demo
+            if (interval == "")
+                QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&apikey=JWLV0KC5UDNH6ODA";
+            else
+                QUERY_URL = "https://www.alphavantage.co/query?function=" + function + "&from_symbol=" + fromSymbol + "&to_symbol=" + toSymbol + "&interval=" + interval + "&apikey=JWLV0KC5UDNH6ODA";
+            Console.WriteLine(QUERY_URL);
             Uri queryUri = new Uri(QUERY_URL);
 
             using (WebClient client = new WebClient())
@@ -46,44 +52,45 @@ namespace HCI_mini_projekat
                 List<Data> allData = ReadData.readData(json_data);
 
                 string transaction = fromSymbol + "-" + toSymbol;
-                drawChart(value4, allData, transaction);
+                drawChart(attribute, allData, transaction, period);
             }
         }
 
-        private void drawChart(string value4, List<Data> allData, string transaction)
+        private void drawChart(string attribute, List<Data> allData, string transaction, string period)
         {
             Labels = new List<string>();
+            List<decimal> values = createValues(attribute, allData);
 
             SeriesCollection.Add(
                 new ColumnSeries
                 {
-                    Title = "Currency#" + currency.ToString() + " \n" + transaction,
-                    Values = new ChartValues<decimal>(createValues(value4, allData)),
+                    Title = "Currency#" + currency.ToString() + " \n" + transaction + " " + period,
+                    Values = new ChartValues<decimal>(values),
                     Fill = (SolidColorBrush)new BrushConverter().ConvertFrom(color[currency % 6 - 1])
                 });
 
 
             for (int i = 0; i < 10; i++)
             {
-                Labels.Add(allData[i].time);
+                Labels.Add(allData[i].time.Substring(0,10));
             }
-            YFormatter = value => value.ToString();
+            YFormatter = value => values.ToString();
         }
 
-        private List<decimal> createValues(string value4, List<Data> allData)
+        private List<decimal> createValues(string attribute, List<Data> allData)
         {
 
             List<decimal> values = new List<decimal>();
 
             for (int i = 0; i < 10; i++)
             {
-                if (value4.Equals("high"))
+                if (attribute.Equals("high"))
                     values.Add(allData[i].high);
-                else if (value4.Equals("low"))
+                else if (attribute.Equals("low"))
                     values.Add(allData[i].low);
-                else if (value4.Equals("open"))
+                else if (attribute.Equals("open"))
                     values.Add(allData[i].open);
-                else if (value4.Equals("close"))
+                else if (attribute.Equals("close"))
                     values.Add(allData[i].close);
             }
             return values;

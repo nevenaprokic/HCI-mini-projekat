@@ -6,7 +6,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:HCI_mini_projekat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+         >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*" />
@@ -40,41 +40,35 @@
             <ColumnDefinition Width="0.5*" />
             <ColumnDefinition Width="0.1*" />
         </Grid.ColumnDefinitions>
-        <Label Content="Currency#1" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right"  Foreground="#911C33"/>
-        <ComboBox Grid.Column="2" x:Name="comboFrom" Grid.Row="1" IsEditable="True" />
-        <Label Content="Currency#2" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Right"  Foreground="#911C33"/>
-        <ComboBox Grid.Column="5" x:Name="comboTo" Grid.Row="1" IsEditable="True" Grid.ColumnSpan="3"  />
+        <Label Content="Currency#1" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#911C33"/>
+        <ComboBox Grid.Column="2" x:Name="comboFrom" Grid.Row="1" Height="28" IsEditable="True" Foreground="#141C61" FontWeight="Bold"/>
+        <Label Content="Currency#2" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#911C33"/>
+        <ComboBox Grid.Column="5" x:Name="comboTo" Grid.Row="1" Height="28" IsEditable="True" Grid.ColumnSpan="3" Foreground="#141C61" FontWeight="Bold"  />
 
 
 
-        <Label Content="Interval" x:Name="labelInterval" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Right" Visibility="Hidden"  Foreground="#911C33"/>
-        <ComboBox Grid.Column="5" x:Name="comboInterval" Grid.Row="3" Grid.ColumnSpan="3" Visibility="Hidden"/>
+        <Label Content="Interval" x:Name="labelInterval" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"  Foreground="#911C33"/>
+        <ComboBox Grid.Column="5" x:Name="comboInterval" Grid.Row="3" Height="28" Grid.ColumnSpan="3" Visibility="Hidden" Foreground="#141C61" FontWeight="Bold"/>
 
-        <Label Content="Period" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Foreground="#911C33"/>
-        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="comboPeriod" SelectionChanged="drawComboboxInterval" />  
+        <Label Content="Period" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#911C33"/>
+        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="comboPeriod" Height="28" SelectionChanged="drawComboboxInterval" Foreground="#141C61" FontWeight="Bold"/>
 
-        <Button Content="Draw" Grid.Column="9" Grid.Row="3" Click="DrawHandler" Background="#141C61" Foreground="White">
+        <Button Content="Draw" Grid.Column="9" Grid.Row="3" Height="28" Click="DrawHandler" Background="#141C61" Foreground="White">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Refresh" Grid.Column="11" Grid.Row="3" Click="ButtonRefresh_Click" Background="#141C61" Foreground="White">
+
+        <Button Content="Clear" Grid.Column="11" Grid.Row="3" Height="28" Click="ClearkHandler" Background="#141C61" Foreground="White">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Clear" Grid.Column="13" Grid.Row="3" Click="ClearkHandler" Background="#141C61" Foreground="White">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button Content="Table view" Grid.ColumnSpan="2" Grid.Column="12" Grid.Row="7"  Background="#141C61" Foreground="White" Click="ViewTableBtn">
+        <Button Content="Table view" Grid.ColumnSpan="2" Grid.Column="12" Grid.Row="7" Height="28" Background="#141C61" Foreground="White" Click="ViewTableBtn">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -100,8 +94,8 @@
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
 
-        <Label Content="Attribute" Grid.Column="9" Grid.Row="1" HorizontalAlignment="Center" Foreground="#911C33"/>
-        <ComboBox Grid.ColumnSpan="3" Grid.Column="10" Grid.Row="1" x:Name="comboAttribute" />
+        <Label Content="Attribute" Grid.Column="9" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#911C33"/>
+        <ComboBox Grid.ColumnSpan="2" Grid.Column="10" Grid.Row="1" Height="28" x:Name="comboAttribute" Foreground="#141C61" FontWeight="Bold" />
 
 
     </Grid>

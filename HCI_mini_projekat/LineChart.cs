@@ -35,7 +35,7 @@ namespace HCI_mini_projekat
             DataContext = this;
         }
 
-        public void AddPair(string timeSeries, string fromSymbol, string toSymbol, string attribute, string interval = "")
+        public void AddPair(string timeSeries, string fromSymbol, string toSymbol, string attribute, string interval)
         {
             // api key W1M42UWZUELKQJII
             string QUERY_URL = null;
