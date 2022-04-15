@@ -17,7 +17,7 @@ namespace HCI_mini_projekat
         public int currency = 0;
         public SeriesCollection SeriesCollection { get; set; }
         public List<string> Labels { get; set; }
-        public Func<decimal, string> YFormatter { get; set; }
+        public Func<double, string> YFormatter { get; set; }
         public string[] color = { "#1D53A3", "#D66D6F", "#F3DB95", "#F39D5F", "#8F63A2", "#5F9479" };
         public BarChartData()
         {
@@ -59,13 +59,13 @@ namespace HCI_mini_projekat
         private void drawChart(string attribute, List<Data> allData, string transaction, string period)
         {
             Labels = new List<string>();
-            List<decimal> values = createValues(attribute, allData);
+            List<double> values = createValues(attribute, allData);
 
             SeriesCollection.Add(
                 new ColumnSeries
                 {
                     Title = "Currency#" + currency.ToString() + " \n" + transaction + " " + period,
-                    Values = new ChartValues<decimal>(values),
+                    Values = new ChartValues<double>(values),
                     Fill = (SolidColorBrush)new BrushConverter().ConvertFrom(color[currency % 6])
                 });
 
@@ -74,13 +74,13 @@ namespace HCI_mini_projekat
             {
                 Labels.Add(allData[i].time.Substring(0,10));
             }
-            YFormatter = value => values.ToString();
+            YFormatter = value => value.ToString();
         }
 
-        private List<decimal> createValues(string attribute, List<Data> allData)
+        private List<double> createValues(string attribute, List<Data> allData)
         {
 
-            List<decimal> values = new List<decimal>();
+            List<double> values = new List<double>();
 
             for (int i = 0; i < 10; i++)
             {
@@ -124,19 +124,19 @@ namespace HCI_mini_projekat
 
                             if (kp.Key.Equals("1. open"))
                             {
-                                d.open = Convert.ToDecimal(kp.Value);
+                                d.open = Convert.ToDouble(kp.Value);
                             }
                             else if (kp.Key.Equals("2. high"))
                             {
-                                d.high = Convert.ToDecimal(kp.Value);
+                                d.high = Convert.ToDouble(kp.Value);
                             }
                             else if (kp.Key.Equals("3. low"))
                             {
-                                d.low = Convert.ToDecimal(kp.Value);
+                                d.low = Convert.ToDouble(kp.Value);
                             }
                             else if (kp.Key.Equals("4. close"))
                             {
-                                d.close = Convert.ToDecimal(kp.Value);
+                                d.close = Convert.ToDouble(kp.Value);
                             }
                         }
                         allData.Add(d);
@@ -146,28 +146,13 @@ namespace HCI_mini_projekat
             return allData;
         }
     }
-    public class InfoData
-    {
-        public string information { get; set; }
-        public string fromSymbol { get; set; }
-        public string toSymbol { get; set; }
-        public string interval { get; set; }
-        public string timeZone { get; set; }
-        public InfoData(string information, string fromSymbol, string toSymbol, string interval, string timeZone)
-        {
-            this.information = information;
-            this.fromSymbol = fromSymbol;
-            this.toSymbol = toSymbol;
-            this.interval = interval;
-            this.timeZone = timeZone;
-        }
-    }
+   
     public class Data
     {
         public string time { get; set; }
-        public decimal open { get; set; }
-        public decimal high { get; set; }
-        public decimal low { get; set; }
-        public decimal close { get; set; }
+        public double open { get; set; }
+        public double high { get; set; }
+        public double low { get; set; }
+        public double close { get; set; }
     }
 }
