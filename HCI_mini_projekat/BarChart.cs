@@ -64,7 +64,7 @@ namespace HCI_mini_projekat
             SeriesCollection.Add(
                 new ColumnSeries
                 {
-                    Title = "Currency#" + currency.ToString() + " \n" + transaction + " " + period,
+                    Title = transaction + " " + period,
                     Values = new ChartValues<double>(values),
                     Fill = (SolidColorBrush)new BrushConverter().ConvertFrom(color[currency % 6])
                 });
@@ -72,7 +72,7 @@ namespace HCI_mini_projekat
 
             for (int i = 0; i < 10; i++)
             {
-                Labels.Add(allData[i].time.Substring(0,10));
+                Labels.Add(allData[i].time);
             }
             YFormatter = value => value.ToString();
         }

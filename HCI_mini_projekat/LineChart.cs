@@ -31,7 +31,7 @@ namespace HCI_mini_projekat
             SeriesCollection = new SeriesCollection { };
 
             Labels = new List<string>();
-            YFormatter = value => value.ToString("C");
+            YFormatter = value => value.ToString();
 
             DataContext = this;
         }
@@ -76,7 +76,7 @@ namespace HCI_mini_projekat
                     }
                     LineSeries lineSeries = new LineSeries
                     {
-                        Title = $"{fromSymbol}-{toSymbol}",
+                        Title = $"{fromSymbol}-{toSymbol} {timeSeries}",
                         Values = values,
                         PointGeometry = null,
                         PointGeometrySize = 15

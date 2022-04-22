@@ -76,19 +76,19 @@
 
         <lvc:CartesianChart Series="{Binding Path=lineChartData.SeriesCollection}" LegendLocation="Right" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="5">
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Sales" LabelFormatter="{Binding Path=lineChartData.YFormatter}"></lvc:Axis>
+                <lvc:Axis Title="Exchange rate" FontSize="15" LabelFormatter="{Binding Path=lineChartData.YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Month" Labels="{Binding Path=lineChartData.Labels}"></lvc:Axis>
+                <lvc:Axis Title="Time" FontSize="15" Labels="{Binding Path=lineChartData.Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
 
         <lvc:CartesianChart Series="{Binding Path=barChartData.SeriesCollection}" LegendLocation="Right" Grid.Column="7" Grid.ColumnSpan="7" Grid.Row="5">
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Sales" LabelFormatter="{Binding Path=barChartData.YFormatter}"></lvc:Axis>
+                <lvc:Axis Title="Exchange rate" FontSize="15" LabelFormatter="{Binding Path=barChartData.YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Month" Labels="{Binding Path= barChartData.Labels}"></lvc:Axis>
+                <lvc:Axis Title="Time" FontSize="15" Labels="{Binding Path= barChartData.Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
 

@@ -141,6 +141,8 @@ namespace HCI_mini_projekat
             barChartData.cleanChart();
             lineChartData.cleanChart();
             tableAPIs.Clear();
+            comboFrom.SelectedItem = null;
+            comboTo.SelectedItem = null;
         }
 
         private void ViewTableBtn(object sender, RoutedEventArgs e)
