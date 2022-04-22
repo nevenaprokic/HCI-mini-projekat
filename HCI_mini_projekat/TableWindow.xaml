@@ -59,16 +59,15 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding time}"
                                     Header="Time"
-                                    Width="0.2*"                 
+                                    Width="0.2*" 
+                                    IsReadOnly="True"
                  >
-
-
-
 
                 </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding open}"
                                     Header="Open"
                                     Width="0.2*"
+                                    IsReadOnly="True"
                                     >
 
 
@@ -76,6 +75,7 @@
                 <DataGridTextColumn Binding="{Binding low}"
                                     Header="Low"
                                     Width="0.2*"
+                                    IsReadOnly="True"
                                     >
 
 
@@ -83,6 +83,7 @@
                 <DataGridTextColumn Binding="{Binding heigh}"
                                     Header="High"
                                     Width="0.2*"
+                                    IsReadOnly="True"
                                     
                    
                         >
@@ -90,6 +91,7 @@
                 <DataGridTextColumn Binding="{Binding close}"
                                     Header="Close"
                                     Width="0.2*"
+                                    IsReadOnly="True"
                    >
 
                 </DataGridTextColumn>
