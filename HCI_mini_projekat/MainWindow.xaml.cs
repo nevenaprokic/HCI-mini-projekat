@@ -35,7 +35,11 @@ namespace HCI_mini_projekat
 
             comboBox1.ItemsSource = currencyList;
             comboBox2.ItemsSource = currencyList;
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 1;
 
+            comboPeriod.ItemsSource = new[]{ "FX_INTRADAY", "FX_DAILY", "FX_WEEKLY", "FX_MONTHLY" };
+            comboPeriod.SelectedIndex = 0;
 
             lineChartData = new LineChartData();
             barChartData = new BarChartData();
@@ -44,5 +48,15 @@ namespace HCI_mini_projekat
         }
         public LineChartData lineChartData { get; set; }
         public BarChartData barChartData { get; set; }
+
+        private void DrawHandler(object sender, RoutedEventArgs e)
+        {
+            string period = comboPeriod.Text;
+            string fromSymbol = comboBox1.Text.Split('-')[0];
+            string toSymbol = comboBox2.Text.Split('-')[0];
+            string attribute = "1. open";
+            string interval = "";
+            lineChartData.AddPair(period, fromSymbol, toSymbol, interval, attribute);
+        }
     }
 }
