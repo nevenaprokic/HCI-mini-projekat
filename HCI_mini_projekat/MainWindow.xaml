@@ -44,19 +44,6 @@
         <ComboBox Grid.Column="2" x:Name="comboFrom" Grid.Row="1" Height="28" IsEditable="True" Foreground="#141C61" FontWeight="Bold"/>
         <Label Content="Currency#2" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#911C33"/>
         <ComboBox Grid.Column="5" x:Name="comboTo" Grid.Row="1" Height="28" IsEditable="True" Grid.ColumnSpan="3" Foreground="#141C61" FontWeight="Bold"  />
-
-<<<<<<< HEAD
-        <Label Content="Period" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" />
-        <ComboBox Grid.Column="2" x:Name="comboPeriod" Grid.Row="3" />
-
-        <Label Content="Interval" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Right" Visibility="Hidden" />
-        <ComboBox Grid.Column="5" x:Name="comboInterval" Grid.Row="3" Grid.ColumnSpan="3" Visibility="Hidden" />
-
-        <Button Content="Draw" Grid.Column="9" Grid.Row="1" Click="AddPairHandler"/>
-        <Button Content="Refresh" Grid.Column="11" Grid.Row="1"/>
-        <Button Content="Clear" Grid.Column="13" Grid.Row="1"/>
-        <Button Content="Table view" Grid.ColumnSpan="2" Grid.Column="12" Grid.Row="7"/>
-=======
         <Label Content="Interval" x:Name="labelInterval" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"  Foreground="#911C33"/>
         <ComboBox Grid.Column="5" x:Name="comboInterval" Grid.Row="3" Height="28" Grid.ColumnSpan="3" Visibility="Hidden" Foreground="#141C61" FontWeight="Bold"/>
 
@@ -85,7 +72,6 @@
                 </Style>
             </Button.Resources>
         </Button>
->>>>>>> 349ab915a31256f31ff3b793ee74fe876425a0ee
 
         <lvc:CartesianChart Series="{Binding Path=lineChartData.SeriesCollection}" LegendLocation="Right" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="5">
             <lvc:CartesianChart.AxisY>
