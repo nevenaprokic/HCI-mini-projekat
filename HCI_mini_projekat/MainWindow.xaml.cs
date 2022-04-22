@@ -85,6 +85,7 @@ namespace HCI_mini_projekat
                     barChartData.createChart(fromSymbol, toSymbol, period, attribute, interval);
                     lineChartData.AddPair(period, fromSymbol, toSymbol, attribute, interval);
                     SetTableData();
+                    btnClear.Visibility = Visibility.Visible;
                 }
                 catch (Exception exc)
                 {
@@ -137,11 +138,15 @@ namespace HCI_mini_projekat
        
         private void ClearHandler(object sender, RoutedEventArgs e)
         {
+            
             barChartData.cleanChart();
             lineChartData.cleanChart();
             tableAPIs.Clear();
             comboFrom.SelectedItem = null;
             comboTo.SelectedItem = null;
+            btnClear.Visibility = Visibility.Hidden;
+
+
         }
 
         private void ViewTableBtn(object sender, RoutedEventArgs e)

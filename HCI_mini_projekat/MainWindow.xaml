@@ -58,7 +58,7 @@
             </Button.Resources>
         </Button>
 
-        <Button Content="Clear" Grid.Column="11" Grid.Row="3" Height="28" Click="ClearHandler" Background="#141C61" Foreground="White">
+        <Button Content="Clear" x:Name="btnClear" Visibility="Hidden" Grid.Column="11" Grid.Row="3" Height="28" Click="ClearHandler" Background="#141C61" Foreground="White">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
